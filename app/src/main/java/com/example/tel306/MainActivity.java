@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +19,8 @@ public class MainActivity extends AppCompatActivity {
             "La perserverancia es el camino al exito"};
     String [] palabras_relajantes = {"Un descanso de mas energia", "Suficiente por ahora, toma agua",
             "para un segundo para volver con más ganas"};
-    int ciclo;
+    int ciclo = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,5 +88,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        registerForContextMenu(findViewById(R.id.tiempo_trabajo));
+    }
+
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+         ContadorViewModel contadorViewModel=new ViewModelProvider(this).get(ContadorViewModel.class);
+
+            if(contadorViewModel.getHilo()==null) {
+                getMenuInflater().inflate(R.menu.menu_context, menu);
+            }
     }
 }
