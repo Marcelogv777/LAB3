@@ -201,18 +201,12 @@ public class MainActivity extends AppCompatActivity {
             TextView textView = findViewById(R.id.ciclo_pomodoro);
             textView.setText("ciclo pomodoro " + String.valueOf(ciclo) + " de " + String.valueOf(ciclosTotal));
 
-
-
-
-
             ContadorViewModel contadorViewModel = new ContadorViewModel();
+            contadorViewModel.detenerContador();
             contadorViewModel.setFinTrabajo(60*trabajoEditado);
             contadorViewModel.setFinDescanso(60*descansoEditado);
 
 
-
-
-            contadorViewModel.detenerContador();
             contadorViewModel.setActivo("trabajo");
             ImageView iv = findViewById(R.id.set);
             iv.setImageResource(R.drawable.play);
@@ -221,6 +215,29 @@ public class MainActivity extends AppCompatActivity {
             TextView textView2 = findViewById(R.id.mensajes);
             textView2.setText(" ");
             ciclo = 1;
+
+            int fin = contadorViewModel.getFinDescanso();
+            String min = String.valueOf(fin/60);
+            int segi = fin% 60;
+            String seg;
+            if (segi < 10) {
+                seg = "0" + String.valueOf(segi);
+            } else {
+                seg = String.valueOf(segi);
+            }
+
+            fin = contadorViewModel.getFinTrabajo();
+            String mint = String.valueOf(fin/60);
+            int segit = fin% 60;
+            String segt;
+            if (segit < 10) {
+                segt = "0" + String.valueOf(segit);
+            } else {
+                segt = String.valueOf(segit);
+            }
+
+            TextView temporizador = findViewById(R.id.tiempo_trabajo);
+            temporizador.setText(mint + ":" + segt);
 
         }
     }

@@ -4,13 +4,11 @@
     <string name="tiempo_de_descaso">Tiempo de descaso:</string>
     <string name="_05_00">05:00</string>
     <string name="ciclo_pomodoro_1_de_4">Ciclo pomodoro 1 de 4</string>
-<<<<<<< HEAD
     <string name="edicion">Edicion</string>
     <string name="intervalo_de_trabajo">Intervalo de trabajo (minutos)</string>
     <string name="intervalo_de_descanso">Intervalo de descanso(minutos)</string>
     <string name="cantidad_de_ciclos_pomodoros">cantidad de ciclos pomodoros</string>
     <string name="confirmar">Confirmar</string>
-=======
     <string name="help">Help</string>
     <string name="ayuda_de_pomodoro">Ayuda de Pomodoro</string>
     <string name="volver">Volver</string>
