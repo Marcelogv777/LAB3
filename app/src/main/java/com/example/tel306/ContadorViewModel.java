@@ -11,8 +11,8 @@ public  class ContadorViewModel extends ViewModel {
     private Thread hilo=null;
     private MutableLiveData<Integer> trabajo = new MutableLiveData<>(0);
     private MutableLiveData<Integer> descanso = new MutableLiveData<>(0);
-    private int finTrabajo=5;
-    private int finDescanso=3;
+    private int finTrabajo=1500;
+    private int finDescanso=300;
     private String activo="trabajo";
 
     public void cuentaTrabajo()
