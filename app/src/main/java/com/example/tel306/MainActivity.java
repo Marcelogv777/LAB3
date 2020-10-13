@@ -57,13 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 TextView temporizador = findViewById(R.id.tiempo_trabajo);
                 temporizador.setText(min + ":" + seg);
                 if (integer >= fin) {
-                    contadorViewModel.cuentaDescanso();
-                    int n = palabras_relajantes.length;
-                    Random random = new Random();
-                    int index = random.nextInt(n);
-                    String palabra = palabras_relajantes[index];
-                    TextView textView = findViewById(R.id.mensajes);
-                    textView.setText(palabra);
+                    alertaTerminoTrabajo();
                 }
             }
         });
@@ -219,6 +213,27 @@ public class MainActivity extends AppCompatActivity {
                 Random random = new Random();
                 int index = random.nextInt(n);
                 String palabra = palabras_concentrantes[index];
+                TextView textView = findViewById(R.id.mensajes);
+                textView.setText(palabra);
+            }
+        });
+        builder.show();
+    }
+
+    public void alertaTerminoTrabajo()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Trabajo terminado");
+        builder.setMessage("Debe dejar de trabajar y empezar descansar");
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ContadorViewModel contadorViewModel = new ViewModelProvider(MainActivity.this).get(ContadorViewModel.class);
+                contadorViewModel.cuentaDescanso();
+                int n = palabras_relajantes.length;
+                Random random = new Random();
+                int index = random.nextInt(n);
+                String palabra = palabras_relajantes[index];
                 TextView textView = findViewById(R.id.mensajes);
                 textView.setText(palabra);
             }

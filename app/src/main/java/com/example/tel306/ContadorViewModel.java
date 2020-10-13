@@ -47,8 +47,6 @@ public  class ContadorViewModel extends ViewModel {
 
     public void cuentaDescanso()
     {
-
-
         if(hilo == null)
         {
             final int tiempoFin = finDescanso;
