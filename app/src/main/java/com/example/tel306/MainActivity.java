@@ -2,6 +2,9 @@ package com.example.tel306;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,13 +12,86 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
+
+    String [] palabras_concentrantes = {"No mires el celular", "Tu puedes concentrarte, Vamos!",
+            "La perserverancia es el camino al exito"};
+    String [] palabras_relajantes = {"Un descanso de mas energia", "Suficiente por ahora, toma agua",
+            "para un segundo para volver con más ganas"};
+    int ciclo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final ContadorViewModel contadorViewModel=new ViewModelProvider(this).get(ContadorViewModel.class);
+        ImageView seting = (ImageView) findViewById(R.id.set);
+
+        contadorViewModel.getTrabajo().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                int fin = contadorViewModel.getFinTrabajo();
+                String min= String.valueOf ((fin-integer)/60);
+                int segi=(fin-integer)%60;
+                String seg;
+                if(segi<10)
+                {
+                     seg = "0"+String.valueOf(segi);
+                }
+                else
+                {
+                     seg = String.valueOf(segi);
+                }
+
+                TextView temporizador = findViewById(R.id.tiempo_trabajo);
+                temporizador.setText(min + ":" + seg);
+            }
+        });
+
+        seting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImageView iv = (ImageView) v;
+                if (contadorViewModel.getHilo()==null)
+                {
+                    contadorViewModel.cuentaTrabajo();
+                    iv.setImageResource(R.drawable.pause);
+                    int n=palabras_concentrantes.length;
+                    Random random = new Random();
+                    int index =  random.nextInt(n);
+                    String palabra = palabras_concentrantes[index];
+                    TextView textView = findViewById(R.id.mensajes);
+                    textView.setText(palabra);
+                }
+                else
+                {
+                    contadorViewModel.detenerContador();
+                    iv.setImageResource(R.drawable.play);
+                }
+
+            }
+        });
+
+        ImageView reset = findViewById(R.id.reset);
+        reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                contadorViewModel.detenerContador();
+                ImageView iv = findViewById(R.id.set);
+                iv.setImageResource(R.drawable.play);
+                contadorViewModel.getTrabajo().setValue(0);
+                TextView textView = findViewById(R.id.mensajes);
+                textView.setText(" ");
+            }
+        });
+
+
     }
 
     @Override
@@ -34,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.help: {
-                Toast.makeText(getApplicationContext(), "hace calor", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Abriendo menu de ayuda", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(MainActivity.this,HelpActivity.class));
                 break;
             }
