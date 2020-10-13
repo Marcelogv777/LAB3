@@ -142,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
                 ciclo = 1;
                 TextView tv = findViewById(R.id.ciclo_pomodoro);
                 tv.setText("ciclo pomodoro " + String.valueOf(ciclo) + " de 4");
+                ImageView iv2 = findViewById(R.id.congrats);
+                iv2.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -215,6 +217,8 @@ public class MainActivity extends AppCompatActivity {
                 String palabra = palabras_concentrantes[index];
                 TextView textView = findViewById(R.id.mensajes);
                 textView.setText(palabra);
+                ImageView iv = findViewById(R.id.congrats);
+                iv.setVisibility(View.INVISIBLE);
             }
         });
         builder.show();
@@ -236,6 +240,8 @@ public class MainActivity extends AppCompatActivity {
                 String palabra = palabras_relajantes[index];
                 TextView textView = findViewById(R.id.mensajes);
                 textView.setText(palabra);
+                ImageView iv = findViewById(R.id.congrats);
+                iv.setVisibility(View.VISIBLE);
             }
         });
         builder.show();
