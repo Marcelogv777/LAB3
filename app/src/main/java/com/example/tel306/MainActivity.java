@@ -2,11 +2,13 @@ package com.example.tel306;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -30,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
             "para un segundo para volver con más ganas"};
     int ciclo = 1;
     int ciclosTotal = 4;
+    String [] datos_curiosos ={"Sabias que las arañas tienen 8 ojos",
+            "Sabias que hay 151 pokemon en la primera generacion",
+            "Sabias que Telecomunicaciones es la carrera mas demandada a nivel mundial",
+            "Los pulpos tienen tres corazones y no solo ello, su sangre es azul",
+            "Sabias que las tortugas pueden vivir mas de 100 años"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +59,8 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView temporizador = findViewById(R.id.tiempo_trabajo);
                 temporizador.setText(min + ":" + seg);
-                if (integer == fin) {
-                    contadorViewModel.cuentaDescanso();
-                    int n = palabras_relajantes.length;
-                    Random random = new Random();
-                    int index = random.nextInt(n);
-                    String palabra = palabras_relajantes[index];
-                    TextView textView = findViewById(R.id.mensajes);
-                    textView.setText(palabra);
+                if (integer >= fin) {
+                    alertaTerminoTrabajo();
                 }
             }
         });
@@ -84,17 +85,13 @@ public class MainActivity extends AppCompatActivity {
                     TextView tv = findViewById(R.id.ciclo_pomodoro);
                     tv.setText("ciclo pomodoro " + String.valueOf(ciclo) + " de " + String.valueOf(ciclosTotal));
                     if (ciclo <= ciclosTotal) {
+
                         contadorViewModel.getDescanso().setValue(0);
                         contadorViewModel.getTrabajo().setValue(0);
-                        contadorViewModel.cuentaTrabajo();
-                        int n = palabras_concentrantes.length;
-                        Random random = new Random();
-                        int index = random.nextInt(n);
-                        String palabra = palabras_concentrantes[index];
-                        TextView textView = findViewById(R.id.mensajes);
-                        textView.setText(palabra);
+                        alertaTerminoDescanso();
+
                     } else {
-                        //fin del programa
+                        alertaDatosCuriosos();
                     }
                 }
             }
@@ -148,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
                 ciclo = 1;
                 TextView tv = findViewById(R.id.ciclo_pomodoro);
                 tv.setText("ciclo pomodoro " + String.valueOf(ciclo) + " de " + String.valueOf(ciclosTotal));
+                ImageView iv2 = findViewById(R.id.congrats);
+                iv2.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -242,6 +241,71 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+
+    public void alertaDatosCuriosos()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Dato curioso");
+        int n = datos_curiosos.length;
+        Random random = new Random();
+        int index = random.nextInt(n);
+        String dato = datos_curiosos[index];
+        builder.setMessage(dato);
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
+
+    public void alertaTerminoDescanso()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Descanso terminado");
+        builder.setMessage("A concentrarse nueva mente");
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ContadorViewModel contadorViewModel = new ViewModelProvider(MainActivity.this).get(ContadorViewModel.class);
+                contadorViewModel.cuentaTrabajo();
+                int n = palabras_concentrantes.length;
+                Random random = new Random();
+                int index = random.nextInt(n);
+                String palabra = palabras_concentrantes[index];
+                TextView textView = findViewById(R.id.mensajes);
+                textView.setText(palabra);
+                ImageView iv = findViewById(R.id.congrats);
+                iv.setVisibility(View.INVISIBLE);
+            }
+        });
+        builder.show();
+    }
+
+    public void alertaTerminoTrabajo()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Trabajo terminado");
+        builder.setMessage("Debe dejar de trabajar y empezar descansar");
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ContadorViewModel contadorViewModel = new ViewModelProvider(MainActivity.this).get(ContadorViewModel.class);
+                contadorViewModel.cuentaDescanso();
+                int n = palabras_relajantes.length;
+                Random random = new Random();
+                int index = random.nextInt(n);
+                String palabra = palabras_relajantes[index];
+                TextView textView = findViewById(R.id.mensajes);
+                textView.setText(palabra);
+                ImageView iv = findViewById(R.id.congrats);
+                iv.setVisibility(View.VISIBLE);
+            }
+        });
+        builder.show();
     }
 
 }
