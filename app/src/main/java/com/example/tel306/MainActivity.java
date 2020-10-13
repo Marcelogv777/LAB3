@@ -1,11 +1,13 @@
 package com.example.tel306;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
                 TextView temporizador = findViewById(R.id.tiempo_trabajo);
                 temporizador.setText(min + ":" + seg);
-                if (integer == fin) {
+                if (integer >= fin) {
                     contadorViewModel.cuentaDescanso();
                     int n = palabras_relajantes.length;
                     Random random = new Random();
@@ -89,15 +91,10 @@ public class MainActivity extends AppCompatActivity {
                         tv.setText("ciclo pomodoro "+ String.valueOf(ciclo) +" de 4");
                         contadorViewModel.getDescanso().setValue(0);
                         contadorViewModel.getTrabajo().setValue(0);
-                        contadorViewModel.cuentaTrabajo();
-                        int n = palabras_concentrantes.length;
-                        Random random = new Random();
-                        int index = random.nextInt(n);
-                        String palabra = palabras_concentrantes[index];
-                        TextView textView = findViewById(R.id.mensajes);
-                        textView.setText(palabra);
+                        alertaTerminoDescanso();
+
                     } else {
-                        //fin del programa
+                        alertaDatosCuriosos();
                     }
                 }
             }
@@ -190,6 +187,44 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    public void alertaDatosCuriosos()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Dato curioso");
+        int n = datos_curiosos.length;
+        Random random = new Random();
+        int index = random.nextInt(n);
+        String dato = datos_curiosos[index];
+        builder.setMessage(dato);
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
+    }
+
+    public void alertaTerminoDescanso()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Descanso terminado");
+        builder.setMessage("A concentrarse nueva mente");
+        builder.setPositiveButton("ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ContadorViewModel contadorViewModel = new ViewModelProvider(MainActivity.this).get(ContadorViewModel.class);
+                contadorViewModel.cuentaTrabajo();
+                int n = palabras_concentrantes.length;
+                Random random = new Random();
+                int index = random.nextInt(n);
+                String palabra = palabras_concentrantes[index];
+                TextView textView = findViewById(R.id.mensajes);
+                textView.setText(palabra);
+            }
+        });
+        builder.show();
+    }
 
 
 }
