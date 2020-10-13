@@ -1,4 +1,4 @@
-package com.example.laboratorio3;
+package com.example.tel306;
 
 import android.content.Context;
 
