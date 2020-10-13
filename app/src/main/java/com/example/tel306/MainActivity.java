@@ -183,6 +183,12 @@ public class MainActivity extends AppCompatActivity {
 
                 break;
             case R.id.menuReset:
+                ciclosTotal = 4;
+                TextView textView = findViewById(R.id.ciclo_pomodoro);
+                textView.setText("ciclo pomodoro " + String.valueOf(ciclo) + " de " + String.valueOf(ciclosTotal));
+                ContadorViewModel contadorViewModel = new ContadorViewModel();
+                contadorViewModel.setFinTrabajo(1500);
+                contadorViewModel.setFinDescanso(300);
                 break;
 
         }
