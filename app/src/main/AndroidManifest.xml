@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_tomato_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.pe.edu.pucp.tel306.MainActivity">
+        <activity android:name=".HelpActivity"></activity>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
