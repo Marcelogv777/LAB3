@@ -170,12 +170,6 @@ public class MainActivity extends AppCompatActivity {
        getMenuInflater().inflate(R.menu.help_menu, menu);
         return true;
     }
-    /*
-    public void helpMenu(View view){
-        Toast.makeText(this,"boton HELP",Toast.LENGTH_SHORT).show();
-    }
-
-     */
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
