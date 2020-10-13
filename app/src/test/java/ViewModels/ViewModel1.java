@@ -2,6 +2,6 @@ package ViewModels;
 
 import androidx.lifecycle.ViewModel;
 
-public class viewModel1 extends ViewModel {
+public class ViewModel1 extends ViewModel {
     
 }
