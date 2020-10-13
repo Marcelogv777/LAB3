@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,9 +21,9 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
-    String [] palabras_concentrantes = {"No mires el celular", "Tu puedes concentrarte, Vamos!",
+    String[] palabras_concentrantes = {"No mires el celular", "Tu puedes concentrarte, Vamos!",
             "La perserverancia es el camino al exito"};
-    String [] palabras_relajantes = {"Un descanso de mas energia", "Suficiente por ahora, toma agua",
+    String[] palabras_relajantes = {"Un descanso de mas energia", "Suficiente por ahora, toma agua",
             "para un segundo para volver con más ganas"};
     String [] datos_curiosos ={"Sabias que las arañas tienen 8 ojos",
             "Sabias que hay 151 pokemon en la primera generacion",
@@ -36,32 +37,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final ContadorViewModel contadorViewModel=new ViewModelProvider(this).get(ContadorViewModel.class);
+        final ContadorViewModel contadorViewModel = new ViewModelProvider(this).get(ContadorViewModel.class);
         ImageView seting = (ImageView) findViewById(R.id.set);
         contadorViewModel.getTrabajo().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
                 int fin = contadorViewModel.getFinTrabajo();
-                String min= String.valueOf ((fin-integer)/60);
-                int segi=(fin-integer)%60;
+                String min = String.valueOf((fin - integer) / 60);
+                int segi = (fin - integer) % 60;
                 String seg;
-                if(segi<10)
-                {
-                     seg = "0"+String.valueOf(segi);
-                }
-                else
-                {
-                     seg = String.valueOf(segi);
+                if (segi < 10) {
+                    seg = "0" + String.valueOf(segi);
+                } else {
+                    seg = String.valueOf(segi);
                 }
 
                 TextView temporizador = findViewById(R.id.tiempo_trabajo);
                 temporizador.setText(min + ":" + seg);
-                if (integer==fin)
-                {
+                if (integer == fin) {
                     contadorViewModel.cuentaDescanso();
-                    int n=palabras_relajantes.length;
+                    int n = palabras_relajantes.length;
                     Random random = new Random();
-                    int index =  random.nextInt(n);
+                    int index = random.nextInt(n);
                     String palabra = palabras_relajantes[index];
                     TextView textView = findViewById(R.id.mensajes);
                     textView.setText(palabra);
@@ -73,22 +70,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(Integer integer) {
                 int fin = contadorViewModel.getFinDescanso();
-                String min= String.valueOf ((fin-integer)/60);
-                int segi=(fin-integer)%60;
+                String min = String.valueOf((fin - integer) / 60);
+                int segi = (fin - integer) % 60;
                 String seg;
-                if(segi<10)
-                {
-                    seg = "0"+String.valueOf(segi);
-                }
-                else
-                {
+                if (segi < 10) {
+                    seg = "0" + String.valueOf(segi);
+                } else {
                     seg = String.valueOf(segi);
                 }
 
                 TextView temporizador = findViewById(R.id.tiempo_descanso);
                 temporizador.setText(min + ":" + seg);
-                if(integer==fin)
-                {
+                if (integer == fin) {
                     ciclo++;
                     TextView tv = findViewById(R.id.ciclo_pomodoro);
                     if (ciclo<=4)
@@ -97,15 +90,13 @@ public class MainActivity extends AppCompatActivity {
                         contadorViewModel.getDescanso().setValue(0);
                         contadorViewModel.getTrabajo().setValue(0);
                         contadorViewModel.cuentaTrabajo();
-                        int n=palabras_concentrantes.length;
+                        int n = palabras_concentrantes.length;
                         Random random = new Random();
-                        int index =  random.nextInt(n);
+                        int index = random.nextInt(n);
                         String palabra = palabras_concentrantes[index];
                         TextView textView = findViewById(R.id.mensajes);
                         textView.setText(palabra);
-                    }
-                    else
-                    {
+                    } else {
                         //fin del programa
                     }
                 }
@@ -116,34 +107,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ImageView iv = (ImageView) v;
-                if (contadorViewModel.getHilo()==null)
-                {
+                if (contadorViewModel.getHilo() == null) {
                     iv.setImageResource(R.drawable.pause);
-                    if (contadorViewModel.getActivo().equalsIgnoreCase("trabajo"))
-                    {
+                    if (contadorViewModel.getActivo().equalsIgnoreCase("trabajo")) {
                         contadorViewModel.cuentaTrabajo();
-                        int n=palabras_concentrantes.length;
+                        int n = palabras_concentrantes.length;
                         Random random = new Random();
-                        int index =  random.nextInt(n);
+                        int index = random.nextInt(n);
                         String palabra = palabras_concentrantes[index];
                         TextView textView = findViewById(R.id.mensajes);
                         textView.setText(palabra);
-                    }
-                    else
-                    {
+                    } else {
                         contadorViewModel.cuentaDescanso();
-                        int n=palabras_relajantes.length;
+                        int n = palabras_relajantes.length;
                         Random random = new Random();
-                        int index =  random.nextInt(n);
+                        int index = random.nextInt(n);
                         String palabra = palabras_relajantes[index];
                         TextView textView = findViewById(R.id.mensajes);
                         textView.setText(palabra);
                     }
 
 
-                }
-                else
-                {
+                } else {
                     contadorViewModel.detenerContador();
                     iv.setImageResource(R.drawable.play);
                 }
@@ -163,31 +148,40 @@ public class MainActivity extends AppCompatActivity {
                 contadorViewModel.getDescanso().setValue(0);
                 TextView textView = findViewById(R.id.mensajes);
                 textView.setText(" ");
-                ciclo=1;
+                ciclo = 1;
                 TextView tv = findViewById(R.id.ciclo_pomodoro);
-                tv.setText("ciclo pomodoro "+ String.valueOf(ciclo) +" de 4");
+                tv.setText("ciclo pomodoro " + String.valueOf(ciclo) + " de 4");
             }
         });
+
+        registerForContextMenu(findViewById(R.id.tiempo_trabajo));
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-       getMenuInflater().inflate(R.menu.help_menu, menu);
+        getMenuInflater().inflate(R.menu.help_menu, menu);
         return true;
     }
-    /*
-    public void helpMenu(View view){
-        Toast.makeText(this,"boton HELP",Toast.LENGTH_SHORT).show();
-    }
 
-     */
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        ContadorViewModel contadorViewModel = new ViewModelProvider(this).get(ContadorViewModel.class);
+
+        if (contadorViewModel.getHilo() == null) {
+            getMenuInflater().inflate(R.menu.menu_context, menu);
+        }
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.help: {
                 Toast.makeText(getApplicationContext(), "Abriendo menu de ayuda", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this,HelpActivity.class));
+                startActivity(new Intent(MainActivity.this, HelpActivity.class));
                 break;
             }
 
