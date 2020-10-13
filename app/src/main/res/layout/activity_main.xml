@@ -7,12 +7,78 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/trabajo_cont"
+        android:id="@+id/tiempo_trabajo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="340dp"
-        android:text="TextView"
+        android:text="@string/_25_00"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:text="@string/tiempo_de_descaso"
+        app:layout_constraintBottom_toTopOf="@+id/tiempo_trabajo"
+        app:layout_constraintEnd_toEndOf="@+id/tiempo_trabajo"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/tiempo_trabajo" />
+
+    <TextView
+        android:id="@+id/tiempo_descanso"
+        android:layout_width="63dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/_05_00"
+        app:layout_constraintBottom_toBottomOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toTopOf="@+id/textView2"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/ciclo_pomodoro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="@string/ciclo_pomodoro_1_de_4"
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.828"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/mensajes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="208dp"
+        app:layout_constraintBottom_toTopOf="@+id/tiempo_trabajo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/set"
+        android:layout_width="61dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="68dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tiempo_trabajo"
+        app:srcCompat="@drawable/play" />
+
+    <ImageView
+        android:id="@+id/reset"
+        android:layout_width="60dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/set"
+        app:layout_constraintStart_toEndOf="@+id/set"
+        app:layout_constraintTop_toTopOf="@+id/set"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/reset" />
 </androidx.constraintlayout.widget.ConstraintLayout>
