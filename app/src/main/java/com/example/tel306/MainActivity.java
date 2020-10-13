@@ -85,9 +85,9 @@ public class MainActivity extends AppCompatActivity {
                 {
                     ciclo++;
                     TextView tv = findViewById(R.id.ciclo_pomodoro);
-                    tv.setText("ciclo pomodoro "+ String.valueOf(ciclo) +" de 4");
                     if (ciclo<=4)
                     {
+                        tv.setText("ciclo pomodoro "+ String.valueOf(ciclo) +" de 4");
                         contadorViewModel.getDescanso().setValue(0);
                         contadorViewModel.getTrabajo().setValue(0);
                         contadorViewModel.cuentaTrabajo();
