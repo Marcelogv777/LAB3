@@ -20,6 +20,8 @@ import android.widget.Toast;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
             "La perserverancia es el camino al exito"};
     String[] palabras_relajantes = {"Un descanso de mas energia", "Suficiente por ahora, toma agua",
             "para un segundo para volver con más ganas"};
+    int ciclo = 1;
+    int ciclosTotal = 4;
     String [] datos_curiosos ={"Sabias que las arañas tienen 8 ojos",
             "Sabias que hay 151 pokemon en la primera generacion",
             "Sabias que Telecomunicaciones es la carrera mas demandada a nivel mundial",
             "Los pulpos tienen tres corazones y no solo ello, su sangre es azul",
             "Sabias que las tortugas pueden vivir mas de 100 años"};
-    int ciclo=1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +83,9 @@ public class MainActivity extends AppCompatActivity {
                 if (integer == fin) {
                     ciclo++;
                     TextView tv = findViewById(R.id.ciclo_pomodoro);
-                    if (ciclo<=4)
-                    {
-                        tv.setText("ciclo pomodoro "+ String.valueOf(ciclo) +" de 4");
+                    tv.setText("ciclo pomodoro " + String.valueOf(ciclo) + " de " + String.valueOf(ciclosTotal));
+                    if (ciclo <= ciclosTotal) {
+
                         contadorViewModel.getDescanso().setValue(0);
                         contadorViewModel.getTrabajo().setValue(0);
                         alertaTerminoDescanso();
@@ -142,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 textView.setText(" ");
                 ciclo = 1;
                 TextView tv = findViewById(R.id.ciclo_pomodoro);
-                tv.setText("ciclo pomodoro " + String.valueOf(ciclo) + " de 4");
+                tv.setText("ciclo pomodoro " + String.valueOf(ciclo) + " de " + String.valueOf(ciclosTotal));
                 ImageView iv2 = findViewById(R.id.congrats);
                 iv2.setVisibility(View.INVISIBLE);
             }
@@ -172,6 +174,65 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuEdit:
+                Intent intent = new Intent(MainActivity.this, EditActivity.class);
+                int requestCode = 1;
+                startActivityForResult(intent, requestCode);
+
+                break;
+            case R.id.menuReset:
+                break;
+
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == 1 && resultCode == RESULT_OK){
+            int trabajoEditado = data.getIntExtra("trabajoNew", 25);
+            int descansoEditado = data.getIntExtra("descansoNew", 5);
+            int ciclosEditado = data.getIntExtra("ciclosNew", 4);
+            ciclosTotal = ciclosEditado;
+            TextView textView = findViewById(R.id.ciclo_pomodoro);
+            textView.setText("ciclo pomodoro " + String.valueOf(ciclo) + " de " + String.valueOf(ciclosTotal));
+
+
+
+
+
+            ContadorViewModel contadorViewModel = new ContadorViewModel();
+            contadorViewModel.setFinTrabajo(60*trabajoEditado);
+            contadorViewModel.setFinDescanso(60*descansoEditado);
+
+
+
+
+            contadorViewModel.detenerContador();
+            contadorViewModel.setActivo("trabajo");
+            ImageView iv = findViewById(R.id.set);
+            iv.setImageResource(R.drawable.play);
+            contadorViewModel.getTrabajo().setValue(0);
+            contadorViewModel.getDescanso().setValue(0);
+            TextView textView2 = findViewById(R.id.mensajes);
+            textView2.setText(" ");
+            ciclo = 1;
+
+        }
+    }
+
+
+
+
+
+
+
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.help: {
@@ -179,7 +240,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, HelpActivity.class));
                 break;
             }
-
         }
         return true;
     }
@@ -248,6 +308,5 @@ public class MainActivity extends AppCompatActivity {
         });
         builder.show();
     }
-
 
 }
