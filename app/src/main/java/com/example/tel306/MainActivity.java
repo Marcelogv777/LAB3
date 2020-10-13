@@ -24,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
             "La perserverancia es el camino al exito"};
     String [] palabras_relajantes = {"Un descanso de mas energia", "Suficiente por ahora, toma agua",
             "para un segundo para volver con más ganas"};
+    String [] datos_curiosos ={"Sabias que las arañas tienen 8 ojos",
+            "Sabias que hay 151 pokemon en la primera generacion",
+            "Sabias que Telecomunicaciones es la carrera mas demandada a nivel mundial",
+            "Los pulpos tienen tres corazones y no solo ello, su sangre es azul",
+            "Sabias que las tortugas pueden vivir mas de 100 años"};
     int ciclo=1;
 
 
