@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.tel306.HelpActivity">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ayuda de Pomodoro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="410dp"
+        android:layout_height="639dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:text='Online Pomodoro Timer TomatoTimers is a customizable and easy to use looping pomodoro timer to boost your efficiency.  About Pomodoro Technique Pomodoro™ Technique is a time management method developed by Francesco Cirillo in the late 1980s. This technique use timer to break down works into a set of intervals separated by breaks. Pomodoro technique increases productivity by taking short scheduled breaks regularly.  How to use Pomodoro/ Tomato timers Decide task to be done set timers to 25 minutes for one "Pomodoro" Work on task until timer is complete After timer completion, put a checkmark on to-do list Take a 5 minutes short break After four "Pomodoro" take a long break Repeat to step 1 USE THE LOOP BUTTON TO DO STEP 1 UNTIL STEP 5 IN A ROW  Pomodoro™ and Pomodoro Technique® are registered trademarks of Francesco Cirillo. This web app is not affiliated with Francesco Cirillo.Online Pomodoro Timer TomatoTimers is a customizable and easy to use looping pomodoro timer to boost your efficiency.  About Pomodoro Technique Pomodoro™ Technique is a time management method developed by Francesco Cirillo in the late 1980s. This technique use timer to break down works into a set of intervals separated by breaks. Pomodoro technique increases productivity by taking short scheduled breaks regularly.  How to use Pomodoro/ Tomato timers Decide task to be done set timers to 25 minutes for one "Pomodoro" Work on task until timer is complete After timer completion, put a checkmark on to-do list Take a 5 minutes short break After four "Pomodoro" take a long break Repeat to step 1 USE THE LOOP BUTTON TO DO STEP 1 UNTIL STEP 5 IN A ROW  Pomodoro™ and Pomodoro Technique® are registered trademarks of Francesco Cirillo. This web app is not affiliated with Francesco Cirillo.Online Pomodoro Timer TomatoTimers is a customizable and easy to use looping pomodoro timer to boost your efficiency.  About Pomodoro Technique Pomodoro™ Technique is a time management method developed by Francesco Cirillo in the late 1980s. This technique use timer to break down works into a set of intervals separated by breaks. Pomodoro technique increases productivity by taking short scheduled breaks regularly.  How to use Pomodoro/ Tomato timers Decide task to be done set timers to 25 minutes for one "Pomodoro" Work on task until timer is complete After timer completion, put a checkmark on to-do list Take a 5 minutes short break After four "Pomodoro" take a long break Repeat to step 1 USE THE LOOP BUTTON TO DO STEP 1 UNTIL STEP 5 IN A ROW  Pomodoro™ and Pomodoro Technique® are registered trademarks of Francesco Cirillo. This web app is not affiliated with Francesco Cirillo.' />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
