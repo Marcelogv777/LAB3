@@ -189,6 +189,30 @@ public class MainActivity extends AppCompatActivity {
                 ContadorViewModel contadorViewModel = new ContadorViewModel();
                 contadorViewModel.setFinTrabajo(1500);
                 contadorViewModel.setFinDescanso(300);
+
+                int fin = contadorViewModel.getFinDescanso();
+                String min = String.valueOf(fin/60);
+                int segi = fin% 60;
+                String seg;
+                if (segi < 10) {
+                    seg = "0" + String.valueOf(segi);
+                } else {
+                    seg = String.valueOf(segi);
+                }
+                TextView temporizador = findViewById(R.id.tiempo_descanso);
+                temporizador.setText(min + ":" + seg);
+
+                fin = contadorViewModel.getFinTrabajo();
+                String mint = String.valueOf(fin/60);
+                int segit = fin% 60;
+                String segt;
+                if (segit < 10) {
+                    segt = "0" + String.valueOf(segit);
+                } else {
+                    segt = String.valueOf(segit);
+                }
+                TextView temporizador2 = findViewById(R.id.tiempo_trabajo);
+                temporizador2.setText(mint + ":" + segt);
                 break;
 
         }
@@ -231,6 +255,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 seg = String.valueOf(segi);
             }
+            TextView temporizador = findViewById(R.id.tiempo_descanso);
+            temporizador.setText(min + ":" + seg);
 
             fin = contadorViewModel.getFinTrabajo();
             String mint = String.valueOf(fin/60);
@@ -242,8 +268,8 @@ public class MainActivity extends AppCompatActivity {
                 segt = String.valueOf(segit);
             }
 
-            TextView temporizador = findViewById(R.id.tiempo_trabajo);
-            temporizador.setText(mint + ":" + segt);
+            TextView temporizador2 = findViewById(R.id.tiempo_trabajo);
+            temporizador2.setText(mint + ":" + segt);
 
         }
     }
