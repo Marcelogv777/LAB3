@@ -15,9 +15,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/volver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="volverMain"
+        android:text="Volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView3" />
+
     <ScrollView
-        android:layout_width="410dp"
-        android:layout_height="639dp"
+        android:id="@+id/scrollView3"
+        android:layout_width="406dp"
+        android:layout_height="534dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
                 android:text='Online Pomodoro Timer TomatoTimers is a customizable and easy to use looping pomodoro timer to boost your efficiency.  About Pomodoro Technique Pomodoro™ Technique is a time management method developed by Francesco Cirillo in the late 1980s. This technique use timer to break down works into a set of intervals separated by breaks. Pomodoro technique increases productivity by taking short scheduled breaks regularly.  How to use Pomodoro/ Tomato timers Decide task to be done set timers to 25 minutes for one "Pomodoro" Work on task until timer is complete After timer completion, put a checkmark on to-do list Take a 5 minutes short break After four "Pomodoro" take a long break Repeat to step 1 USE THE LOOP BUTTON TO DO STEP 1 UNTIL STEP 5 IN A ROW  Pomodoro™ and Pomodoro Technique® are registered trademarks of Francesco Cirillo. This web app is not affiliated with Francesco Cirillo.Online Pomodoro Timer TomatoTimers is a customizable and easy to use looping pomodoro timer to boost your efficiency.  About Pomodoro Technique Pomodoro™ Technique is a time management method developed by Francesco Cirillo in the late 1980s. This technique use timer to break down works into a set of intervals separated by breaks. Pomodoro technique increases productivity by taking short scheduled breaks regularly.  How to use Pomodoro/ Tomato timers Decide task to be done set timers to 25 minutes for one "Pomodoro" Work on task until timer is complete After timer completion, put a checkmark on to-do list Take a 5 minutes short break After four "Pomodoro" take a long break Repeat to step 1 USE THE LOOP BUTTON TO DO STEP 1 UNTIL STEP 5 IN A ROW  Pomodoro™ and Pomodoro Technique® are registered trademarks of Francesco Cirillo. This web app is not affiliated with Francesco Cirillo.Online Pomodoro Timer TomatoTimers is a customizable and easy to use looping pomodoro timer to boost your efficiency.  About Pomodoro Technique Pomodoro™ Technique is a time management method developed by Francesco Cirillo in the late 1980s. This technique use timer to break down works into a set of intervals separated by breaks. Pomodoro technique increases productivity by taking short scheduled breaks regularly.  How to use Pomodoro/ Tomato timers Decide task to be done set timers to 25 minutes for one "Pomodoro" Work on task until timer is complete After timer completion, put a checkmark on to-do list Take a 5 minutes short break After four "Pomodoro" take a long break Repeat to step 1 USE THE LOOP BUTTON TO DO STEP 1 UNTIL STEP 5 IN A ROW  Pomodoro™ and Pomodoro Technique® are registered trademarks of Francesco Cirillo. This web app is not affiliated with Francesco Cirillo.' />
+
         </LinearLayout>
     </ScrollView>
 
