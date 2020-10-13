@@ -11,9 +11,9 @@ public  class ContadorViewModel extends ViewModel {
     private Thread hilo=null;
     private MutableLiveData<Integer> trabajo = new MutableLiveData<>(0);
     private MutableLiveData<Integer> descanso = new MutableLiveData<>(0);
-    private int finTrabajo=25*60;
-    private int finDescanso=5*60;
-    private String activo;
+    private int finTrabajo=5;
+    private int finDescanso=3;
+    private String activo="trabajo";
 
     public void cuentaTrabajo()
     {
@@ -56,20 +56,23 @@ public  class ContadorViewModel extends ViewModel {
                 @Override
                 public void run() {
                     activo="descanso";
-                    int contadorLocal=0;
+                    int contadorLocal=descanso.getValue();
                     while (contadorLocal<tiempoFin)
                     {
                         try {
                             Thread.sleep(1000);
+                            contadorLocal++;
+                            descanso.postValue(contadorLocal);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                             break;
                         }
-                        contadorLocal++;
-                        descanso.postValue(contadorLocal);
+
                     }
+                    hilo=null;
                 }
             });
+
             hilo.start();
         }
 
