@@ -1,12 +1,17 @@
 package com.example.tel306;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,9 +30,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ImageView seting = (ImageView) findViewById(R.id.set);
         final ContadorViewModel contadorViewModel=new ViewModelProvider(this).get(ContadorViewModel.class);
+        ImageView seting = (ImageView) findViewById(R.id.set);
         contadorViewModel.getTrabajo().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
@@ -82,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
                     ciclo++;
                     TextView tv = findViewById(R.id.ciclo_pomodoro);
                     tv.setText("ciclo pomodoro "+ String.valueOf(ciclo) +" de 4");
-                    if (ciclo<4)
+                    if (ciclo<=4)
                     {
                         contadorViewModel.getDescanso().setValue(0);
                         contadorViewModel.getTrabajo().setValue(0);
@@ -154,7 +158,36 @@ public class MainActivity extends AppCompatActivity {
                 TextView textView = findViewById(R.id.mensajes);
                 textView.setText(" ");
                 ciclo=1;
+                TextView tv = findViewById(R.id.ciclo_pomodoro);
+                tv.setText("ciclo pomodoro "+ String.valueOf(ciclo) +" de 4");
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+       getMenuInflater().inflate(R.menu.help_menu, menu);
+        return true;
+    }
+    /*
+    public void helpMenu(View view){
+        Toast.makeText(this,"boton HELP",Toast.LENGTH_SHORT).show();
+    }
+
+     */
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.help: {
+                Toast.makeText(getApplicationContext(), "Abriendo menu de ayuda", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity.this,HelpActivity.class));
+                break;
+            }
+
+        }
+        return true;
+    }
+
+
 }
